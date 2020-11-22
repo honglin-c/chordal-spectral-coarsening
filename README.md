@@ -1,6 +1,8 @@
 # Chordal Decomposition for Spectral Coarsening
 
-This is the MATLAB implementation of "Chordal Decomposition for Spectral Coarsening" [Chen et al. 2020]. The only dependency is the gptoolbox: `https://github.com/alecjacobson/gptoolbox`.
+This is the MATLAB implementation of "[Chordal Decomposition for Spectral Coarsening](https://www.dgp.toronto.edu/projects/chordal-spectral-coarsening/)" by Honglin Chen, Hsueh-Ti Derek Liu, Alec Jacobson and David I.W. Levin. The only dependency is the gptoolbox: `https://github.com/alecjacobson/gptoolbox`.
+
+This repository contains several demos:
 
 * main_specCoarse.m: demo for comparison with [Liu et al. 2019]  on spectral coarsening of cotangent Laplacian
 
@@ -10,7 +12,7 @@ This is the MATLAB implementation of "Chordal Decomposition for Spectral Coarsen
 
 * main_qslim_anisotropic.m: demo for optimizing anisotropic Laplacian starting from the coarsened Laplacian of [Garland & Heckbert 1997]
 
-This program has been tested on MATLAB R2019b and R2020a.
+This program has been tested on MATLAB R2019b and R2020a. If you have any questions, please contact Honglin Chen (chl9797@cs.toronto.edu).
 
 ## Bibtex
 
