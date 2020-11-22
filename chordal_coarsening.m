@@ -1,8 +1,8 @@
 function [X, state] = chordal_coarsening(L, M, R, Xsp, Mc, X_init, varargin)
 % CHORDAL_COARSENING 
-% coarsen a sparse positive semidefinite discrete operator from #V by #V 
-% to #Vc by #Vc while preserving its spectral properties, i.e., the
-% eigenvectors and eigenvalues at the lowes
+% Coarsen a sparse positive semidefinite discrete operator from #V by #V 
+% to #Vc by #Vc while preserving its eigenvectors and eigenvalues at the 
+% lowest frequency using chordal decomposition
 %
 % Inputs:
 %   L       #V by #V    sparse, positive semi-definite high-res discrete operator (e.g., laplacian matrix) 
@@ -12,7 +12,7 @@ function [X, state] = chordal_coarsening(L, M, R, Xsp, Mc, X_init, varargin)
 %   Mc      #Vc by #Vc  mass matrix of the coarsened operator
 %   X_init  #Vc by #Vc  initial guess of the coarsened operator
 %   Optional:
-%     'numEig'  number of the eigenvectors in use
+%     'numEig'  number of the eigenvectors to be preserved
 %     'tfill'   parameter controlling the chordal decomposition
 %     'tsize'   (another) parameter controlling the chordal decomposition
 % Outputs:
