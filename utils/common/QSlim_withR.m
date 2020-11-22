@@ -71,7 +71,7 @@ function [RV, RF,R] = QSlim_withR(V,F,tarV, varargin)
     while true
         % print progress
         if mod(numCollapse, 100) == 0
-            fprintf('collapse progress %d / %d\n', [numCollapse totalCollapse])
+            fprintf('collapse progress [Garland & Heckbert 1997] %d / %d\n', [numCollapse totalCollapse])
         end
         stall = stall + 1;
         

@@ -1,8 +1,16 @@
 function [X_chordal, cliques, vecCliques, P] = preprocessChordal(X, tfill, tsize)
-    % X_chordal: chordal extended X
-    % cliques: clique index Zk = A_chordal(clique{k},clique{k})
-    % vecCliques: vecclique index Z(vecCliques{k}) = A_chordal(clique{k},clique{k})
-    % P: a set of index selection matrix
+% PREPROCESSCHORDAL
+% Perform chordal decomposition and compute the selection matrices
+% Inputs:
+%   X      #Vc by #Vc matrix sparsity pattern
+%   tfill  parameter for chordal decomposition
+%   tsize  (another) parameter for chordal decomposition
+% Outputs:
+%   X_chordal   chordal extended X
+%   cliques     clique index Zk = A_chordal(clique{k},clique{k})
+%   vecCliques  vecclique index Z(vecCliques{k}) = A_chordal(clique{k},clique{k})
+%   P           a set of index selection matrix
+%
 
     if(~exist('tfill','var'))
         tfill = 50;
