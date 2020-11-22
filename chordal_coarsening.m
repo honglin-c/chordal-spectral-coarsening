@@ -15,9 +15,10 @@ function [X, state] = chordal_coarsening(L, M, R, Xsp, Mc, X_init, varargin)
 %     'numEig'  number of the eigenvectors to be preserved
 %     'tfill'   parameter controlling the chordal decomposition
 %     'tsize'   (another) parameter controlling the chordal decomposition
+%     'weight_scale' scale the weighting of the eigenvectors by emphasizing on the first 100 eigenvectors (used in volume-to-surface approximation) 
 % Outputs:
 %   X       #Vc by #Vc  the output coarsened operator after optimization    
-%   state   optimization log (optional)
+%   state   output log of ADMM (optional)
 %
 % See: % "Chordal decomposition for spectral coarsening" [Chen et al. 2020]
 %      https://github.com/honglin-c/chordal-spectral-coarsening
@@ -26,11 +27,12 @@ function [X, state] = chordal_coarsening(L, M, R, Xsp, Mc, X_init, varargin)
   nV = size(Xsp, 1);
   numVc = size(Xsp, 1);
   numEig = round(numVc * 0.5);
+  weight_scale = false;
 
   % process user input parameters
   params_to_variables = containers.Map(...
-      {'numEig', 'tfill', 'tsize'}, ...
-      {'numEig', 'tfill', 'tsize'});
+      {'numEig', 'tfill', 'tsize', 'weight_scale'}, ...
+      {'numEig', 'tfill', 'tsize', 'weight_scale'});
   v = 1;
   while v <= numel(varargin)
       param_name = varargin{v};
@@ -58,6 +60,10 @@ function [X, state] = chordal_coarsening(L, M, R, Xsp, Mc, X_init, varargin)
   eVec = massOrthogonal(eVec, M);
   eVec = eVec(:,2:end);
   eVal_inv = diag(1./eVal(2:end));
+  if weight_scale % scale the weighting a bit differently in volume-to-surface approximation
+    eVal_scale = [ones(100,1); 0.1*ones(length(eVal)-1-100,1)]; % emphasize on the first 100 eigenvectors
+    eVal_inv = diag(1./eVal(2:end).*eVal_scale);
+  end
   invM = diag(diag(M).^(-1));
   invMc = diag(diag(Mc).^(-1));
   sqrtMc = diag(sqrt(diag(Mc)));
